@@ -36,4 +36,8 @@ public class CLI {
     public static String signUp(String username) {
         return "Successfully sign up as : " + username;
     }
+
+    public static String list() {
+        return "List of the uploaded files : ";
+    }
 }
