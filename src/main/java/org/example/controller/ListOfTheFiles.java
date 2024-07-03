@@ -7,22 +7,27 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
-import java.net.InetAddress;
 
-public class UDPUploadAndDownloadHandler {
+public class ListOfTheFiles {
     private DatagramSocket udpSocket;
     private BufferedReader consoleReader;
+    private
 
-    public UDPUploadAndDownloadHandler(DatagramSocket udpSocket, BufferedReader consoleReader) {
+    public ListOfTheFiles(DatagramSocket udpSocket, BufferedReader consoleReader) {
         this.udpSocket = udpSocket;
         this.consoleReader = consoleReader;
     }
 
     public void uploadAndDownloadManager() throws IOException {
         byte[] list = "0".getBytes();
-        DatagramPacket listRequest = new DatagramPacket(list, list.length, InetAddress.getByName(Storage.getServerAddress()), Storage.getServerPort());
-        udpSocket.send(listRequest);
+        new MainThread(new UDPSender(udpSocket.getInetAddress(), udpSocket.getPort(), list)).run();
         System.out.println(CLI.list());
+        while (true) {
+            byte[] listOfFiles = new byte[Storage.getPacketSize()];
+            DatagramPacket receivePacket = new DatagramPacket(listOfFiles, listOfFiles.length);
+            udpSocket.receive(receivePacket);
+            new MainThread(new ListHandler(udpSocket, receivePacket));
+        }
 
     }
 }
