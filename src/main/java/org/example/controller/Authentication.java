@@ -20,11 +20,11 @@ public class Authentication {
     public void signInAndSignUpManager() throws IOException {
         System.out.println(CLI.signInAndSignUp());
         String input = consoleReader.readLine();
-        if (AuthenticationManager.signInAndSignUpChecking(input)) {
+        if (LogicManager.oneOrTwoChecking(input)) {
             tcpWriter.println(input);
             usernameManager();
         } else {
-            System.out.println(CLI.signInAndSignUpWarning());
+            System.out.println(CLI.Warning());
             signInAndSignUpManager();
         }
     }
@@ -33,15 +33,15 @@ public class Authentication {
         System.out.println(CLI.username());
         String username = consoleReader.readLine();
         tcpWriter.println(username);
-        int input = Integer.parseInt(tcpReader.readLine());
-        if (input == 0) {
+        String input = tcpReader.readLine();
+        if (input.equals("0")) {
             passwordManager(username);
-        } else if (input == 1) {
+        } else if (input.equals("1")) {
             System.out.println(CLI.signInWrongUsername());
             usernameManager();
-        } else if (input == 2) {
+        } else if (input.equals("2")) {
             passwordManager(username);
-        } else if (input == 3) {
+        } else if (input.equals("3")) {
             System.out.println(CLI.signUpWrongUsername());
             usernameManager();
         }

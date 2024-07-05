@@ -13,7 +13,7 @@ public class CLI {
         return "password : ";
     }
 
-    public static String signInAndSignUpWarning() {
+    public static String Warning() {
         return "Please enter a valid number.";
     }
 
@@ -39,5 +39,21 @@ public class CLI {
 
     public static String list() {
         return "List of the uploaded files : ";
+    }
+
+    public static String uploadAndDownload() {
+        return "1 - Upload" + "\n" + "2 - Download";
+    }
+
+    public static String upload() {
+        return "Enter path of the file that you want to upload : ";
+    }
+
+    public static String fileSent(String fileName) {
+        return "File sent successfully : " + fileName;
+    }
+
+    public static String listHandler() {
+        return "You do not upload any file yet.";
     }
 }

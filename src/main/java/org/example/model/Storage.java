@@ -4,7 +4,7 @@ package org.example.model;
 
 public class Storage {
     private static final String SERVER_ADDRESS = "localhost";
-    private static final int SERVER_PORT = 8080 ;
+    private static final int SERVER_PORT = 9876 ;
     private static final int PACKET_SIZE = 1024;
 
     public static String getServerAddress() {
