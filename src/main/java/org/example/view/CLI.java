@@ -53,7 +53,27 @@ public class CLI {
         return "File sent successfully : " + fileName;
     }
 
-    public static String listHandler() {
-        return "You do not upload any file yet.";
+    public static String pathWarning() {
+        return "Please enter a valid path.";
+    }
+
+    public static String uploadWarning() {
+        return "You have uploaded this file before.";
+    }
+
+    public static String download() {
+        return "Please enter the name of the file you want to download : ";
+    }
+
+    public static String downloadWarning() {
+        return "File not found.";
+    }
+
+    public static String usernameWarning() {
+        return "Please enter a valid username.";
+    }
+
+    public static String passwordWarning() {
+        return "Please enter a valid password.";
     }
 }

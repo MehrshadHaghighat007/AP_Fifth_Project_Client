@@ -8,16 +8,13 @@ import java.net.DatagramSocket;
 
 public class ListHandler implements Runnable {
     private DatagramSocket udpSocket;
-    private String input;
 
-    public ListHandler(DatagramSocket udpSocket, String input) {
+    public ListHandler(DatagramSocket udpSocket) {
         this.udpSocket = udpSocket;
-        this.input = input;
     }
 
     @Override
     public void run() {
-        printMessage(input);
         while (true) {
             byte[] fileNameByteArray = new byte[Storage.getPacketSize()];
             DatagramPacket receivePacket = new DatagramPacket(fileNameByteArray, fileNameByteArray.length);
@@ -31,13 +28,7 @@ public class ListHandler implements Runnable {
                 break;
             }
             String fileName = new String(receivePacket.getData(), 0, len);
-            printMessage(fileName);
-        }
-    }
-
-    private void printMessage(String message) {
-        synchronized (System.out) {
-            System.out.println(message);
+            System.out.println(fileName);
         }
     }
 }

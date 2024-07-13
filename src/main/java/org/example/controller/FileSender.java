@@ -20,7 +20,7 @@ public class FileSender implements Runnable {
         FileInputStream fileInputStream = null;
         try {
             byte[] fileNameData = file.getName().getBytes();
-            new MainThread(new UDPSender(clientSocket, fileNameData)).run();
+            new MainThread(new UDPSender(clientSocket, Storage.getServerPortIi(), fileNameData)).run();
 
             fileInputStream = new FileInputStream(file);
             byte[] sendData = new byte[Storage.getPacketSize()];
@@ -29,11 +29,11 @@ public class FileSender implements Runnable {
             while ((bytesRead = fileInputStream.read(sendData)) != -1) {
                 byte[] packetData = new byte[bytesRead];
                 System.arraycopy(sendData, 0, packetData, 0, bytesRead);
-                new MainThread(new UDPSender(clientSocket, packetData)).run();
+                new MainThread(new UDPSender(clientSocket, Storage.getServerPortIi(), packetData)).run();
                 sendData = new byte[Storage.getPacketSize()];
             }
 
-            new MainThread(new UDPSender(clientSocket, new byte[0])).run();
+            new MainThread(new UDPSender(clientSocket, Storage.getServerPortIi(), new byte[0])).run();
 
             System.out.println(CLI.fileSent(file.getName()));
 
